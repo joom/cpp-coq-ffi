@@ -3,11 +3,13 @@ extern "C" {
   #include "gc_stack.h"
   #include "glue.h"
 }
+#include <any>
 #include <cstddef>
 #include <cstdint>
 #include <iostream>
 #include <memory>
 #include <set>
+#include <vector>
  
 
 #define BEGINFRAME(tinfo,n) {{{{{ value __ROOT__[n];   \
@@ -68,8 +70,7 @@ value uint63_mul(value x, value y) {
 enum mi { PURE, BIND, NEW, LOOKUP, INSERT, DELETE };
 
 /* #define DEBUG */
-value runM(struct thread_info *tinfo, value action) {
-
+value runM(struct thread_info *tinfo, std::vector<std::any>& all_sets, value action) {
   BEGINFRAME(tinfo, 2)
   unsigned int tag = get_prog_SetsC_MI_tag(action);
   if (tag == PURE) {
@@ -83,9 +84,9 @@ value runM(struct thread_info *tinfo, value action) {
     #endif
     value arg0 = get_args(action)[2];
     value arg1 = get_args(action)[3];
-    value temp = LIVEPOINTERS1(tinfo, runM(tinfo, arg0), arg0);
+    value temp = LIVEPOINTERS1(tinfo, runM(tinfo, all_sets, arg0), arg0);
     temp = LIVEPOINTERS2(tinfo, call(tinfo, arg1, temp), arg1, temp);
-    return runM(tinfo, temp);
+    return runM(tinfo, all_sets, temp);
 
   } else if (tag == NEW) {
     #ifdef DEBUG
@@ -96,6 +97,7 @@ value runM(struct thread_info *tinfo, value action) {
       return call(tinfo, hasher, a) < call(tinfo, hasher, b);
     };
     std::set<value, decltype(cmp)> s(cmp);
+    all_sets.push_back(std::make_any<std::set<value, decltype(cmp)>>(s));
     #ifdef DEBUG
       std::cout << "The set has " << s.size() << " elements!\n";
     #endif
@@ -165,6 +167,13 @@ value runM(struct thread_info *tinfo, value action) {
 }
 
 value set_runM(struct thread_info *tinfo, value a, value action) {
-  value temp = runM(tinfo, call(tinfo, action, 1));
+  std::vector<std::any> all_sets = {};
+  value temp = runM(tinfo, all_sets, call(tinfo, action, 1));
+  // Empty all the sets
+  for (int i = 0; i < all_sets.size(); i++){
+    // FIXME this is causing a bad any cast error. 
+    // Not sure how to fix it because all the sets have different types based on the cmp function.
+    /* std::any_cast<std::set<value>>(all_sets[i].second).clear(); */
+	}
   return temp;
 }

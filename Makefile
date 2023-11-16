@@ -19,4 +19,4 @@ coq:
 	coqc prog.v
 
 cpp:
-	g++ -w -fpermissive -g -o prog main.cpp
+	g++ -std=c++20 -w -fpermissive -g -o prog main.cpp
