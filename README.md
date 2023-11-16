@@ -2,7 +2,7 @@
 
 A primitive set data structure for Coq, using `std::set` from C++.
 
-It currently has bugs, I'm working on it, this is only meant to be an experiment.
+The example returns the right result but it may have other bugs. This is only meant to be an experiment.
 
 You can compile it by `make cpp`, and run `./prog`.
 
@@ -10,11 +10,12 @@ You can compile it by `make cpp`, and run `./prog`.
 
 I'm committing the CertiCoq generated C files here, but I had to make a few changes in them:
 
-- Added `GLUE_H` to the `glue.h` file
-- Removed * from temp vars in `call` in `glue.c`
-- Remove `printf` and `is_ptr` declarations from `glue.h`
-- Remove `is_ptr` declaration from `prog.prog.c`
-- Remove includes like `"home/coq/.opam/...."` from `prog.prog.c`
-- Remove the definition of the `closure` struct from `glue.c`
+- Added `#ifndef GLUE_H` ... to the `glue.h` file.
+- Removed * from temp vars in `call` in `glue.c`.
+- Removed `printf` and `is_ptr` declarations from `glue.c`.
+- Removed `is_ptr` declaration from `prog.prog.c`.
+- Removed includes like `"home/coq/.opam/...."` from `prog.prog.c`.
+- Removed the definition of the `closure` struct from `glue.c`.
+- Added `#include "glue.h"` to `glue.c`.
 
 So if you run `make coq`, you may have to do these.

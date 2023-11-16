@@ -5,8 +5,10 @@ extern "C" {
 }
 #include <cstddef>
 #include <cstdint>
-#include <set>
 #include <iostream>
+#include <memory>
+#include <set>
+ 
 
 #define BEGINFRAME(tinfo,n) {{{{{ value __ROOT__[n];   \
    struct stack_frame __FRAME__ = { NULL/*bogus*/, __ROOT__, tinfo->fp }; \
@@ -65,63 +67,104 @@ value uint63_mul(value x, value y) {
 
 enum mi { PURE, BIND, NEW, LOOKUP, INSERT, DELETE };
 
+/* #define DEBUG */
 value runM(struct thread_info *tinfo, value action) {
+
   BEGINFRAME(tinfo, 2)
   unsigned int tag = get_prog_SetsC_MI_tag(action);
   if (tag == PURE) {
-    std::cout << "PURE\n";
+    #ifdef DEBUG
+      std::cout << "PURE\n";
+    #endif
     return get_args(action)[1];
   } else if (tag == BIND) {
-    std::cout << "BIND\n";
+    #ifdef DEBUG
+      std::cout << "BIND\n";
+    #endif
     value arg0 = get_args(action)[2];
     value arg1 = get_args(action)[3];
     value temp = LIVEPOINTERS1(tinfo, runM(tinfo, arg0), arg0);
     temp = LIVEPOINTERS2(tinfo, call(tinfo, arg1, temp), arg1, temp);
     return runM(tinfo, temp);
+
   } else if (tag == NEW) {
-    std::cout << "NEW\n";
-    value hasher = get_args(get_args(action)[2])[0];
+    #ifdef DEBUG
+      std::cout << "NEW\n";
+    #endif
+    value hasher = get_args(get_args(action)[1])[0];
     auto cmp = [tinfo, hasher](value a, value b) { 
       return call(tinfo, hasher, a) < call(tinfo, hasher, b);
     };
     std::set<value, decltype(cmp)> s(cmp);
-    std::cout << "The set has " << s.size() << " elements!\n";
-    std::cout << "The set has " << ((std::set<value> *) ((void *) (&s)))->size() << " elements!\n";
+    #ifdef DEBUG
+      std::cout << "The set has " << s.size() << " elements!\n";
+    #endif
     return (value) &s;
+
   } else if (tag == INSERT) {
-    std::cout << "INSERT\n";
+    #ifdef DEBUG
+      std::cout << "INSERT\n";
+    #endif
+    value hasher = get_args(get_args(action)[1])[0];
+    auto cmp = [tinfo, hasher](value a, value b) { 
+      return call(tinfo, hasher, a) < call(tinfo, hasher, b);
+    };
     value s = get_args(action)[2];
-    value k = get_args(action)[3];
-    std::set<value> *cast_set = (std::set<value> *) s;
-    std::cout << "The set has " << cast_set->size() << " elements!\n";
-    cast_set->insert(k);
-    std::cout << "The set has " << cast_set->size() << " elements!\n";
+    value key = get_args(action)[3];
+    std::set<value, decltype(cmp)> *cast_set = (std::set<value, decltype(cmp)> *) s;
+    #ifdef DEBUG
+      std::cout << "The set has " << cast_set->size() << " elements!\n";
+    #endif
+    cast_set->insert(key);
+    #ifdef DEBUG
+      std::cout << "The set has " << cast_set->size() << " elements!\n";
+    #endif
     return make_Coq_Init_Datatypes_unit_tt();
+
   } else if (tag == DELETE) {
+    #ifdef DEBUG
     std::cout << "DELETE\n";
+    #endif
+    value hasher = get_args(get_args(action)[1])[0];
+    auto cmp = [tinfo, hasher](value a, value b) { 
+      return call(tinfo, hasher, a) < call(tinfo, hasher, b);
+    };
     value s = get_args(action)[2];
-    value k = get_args(action)[3];
-    std::set<value> *cast_set = (std::set<value> *) s;
-    cast_set->erase(k);
+    value key = get_args(action)[3];
+    std::set<value, decltype(cmp)> *cast_set = (std::set<value, decltype(cmp)> *) s;
+    cast_set->erase(key);
     return make_Coq_Init_Datatypes_unit_tt();
+
   } else if (tag == LOOKUP) {
-    std::cout << "LOOKUP\n";
+    #ifdef DEBUG
+      std::cout << "LOOKUP\n";
+    #endif
+    value hasher = get_args(get_args(action)[1])[0];
+    auto cmp = [tinfo, hasher](value a, value b) { 
+      return call(tinfo, hasher, a) < call(tinfo, hasher, b);
+    };
     value s = get_args(action)[2];
-    value k = get_args(action)[3];
-    std::set<value> *cast_set = (std::set<value> *) s;
-    std::cout << "The set has " << cast_set->size() << " elements!\n";
-    if (cast_set->count(k)) {
+    value key = get_args(action)[3];
+    std::set<value, decltype(cmp)> *cast_set = (std::set<value, decltype(cmp)> *) s;
+    #ifdef DEBUG
+      std::cout << "The set has " << cast_set->size() << " elements!\n";
+    #endif
+    if (cast_set->count(key)) {
       return make_Coq_Init_Datatypes_bool_true();
     } else {
       return make_Coq_Init_Datatypes_bool_false();
     }
+
   } else {
-    std::cout << "UNKNOWN CASE\n";
+    #ifdef DEBUG
+      std::cout << "UNKNOWN CASE\n";
+    #endif
     exit(EXIT_FAILURE);
   }
   ENDFRAME
 }
 
 value set_runM(struct thread_info *tinfo, value a, value action) {
-  return runM(tinfo, call(tinfo, action, 1));
+  value temp = runM(tinfo, call(tinfo, action, 1));
+  return temp;
 }

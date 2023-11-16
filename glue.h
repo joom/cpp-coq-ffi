@@ -22,8 +22,8 @@ extern value make_prog_SetsC_MI_pureI(value, value, value *);
 extern value alloc_make_prog_SetsC_MI_pureI(struct thread_info *, value, value);
 extern value make_prog_SetsC_MI_bindI(value, value, value, value, value *);
 extern value alloc_make_prog_SetsC_MI_bindI(struct thread_info *, value, value, value, value);
-extern value make_prog_SetsC_MI_newI(value, value *);
-extern value alloc_make_prog_SetsC_MI_newI(struct thread_info *, value);
+extern value make_prog_SetsC_MI_newI(value, value, value *);
+extern value alloc_make_prog_SetsC_MI_newI(struct thread_info *, value, value);
 extern value make_prog_SetsC_MI_lookupI(value, value, value, value, value *);
 extern value alloc_make_prog_SetsC_MI_lookupI(struct thread_info *, value, value, value, value);
 extern value make_prog_SetsC_MI_insertI(value, value, value, value, value *);
@@ -65,6 +65,4 @@ extern signed char const names_of_Coq_Init_Datatypes_unit[1][3];
 
 extern signed char const names_of_prog_SetsC_MI[6][8];
 
-
-#endif /* GLUE_H */
-
+#endif

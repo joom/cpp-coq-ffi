@@ -27,7 +27,7 @@ Module Type Sets.
   Axiom Sets   : Type -> Type -> Type.
   Axiom pure   : forall {S A}, A -> M S A.
   Axiom bind   : forall {S A B}, M S A -> (A -> M S B) -> M S B.
-  Axiom new    : forall {S K}, M S (Sets S K).
+  Axiom new    : forall {S K} `{Hashable K}, M S (Sets S K).
   Axiom lookup : forall {S K} `{Hashable K}, Sets S K -> K -> M S bool.
   Axiom insert : forall {S K} `{Hashable K}, Sets S K -> K -> M S unit.
   Axiom delete : forall {S K} `{Hashable K}, Sets S K -> K -> M S unit.
@@ -39,15 +39,15 @@ Module SetsC <: Sets.
   Inductive MI (S : Type) : Type -> Type :=
   | pureI   : forall {A}, A -> MI S A
   | bindI   : forall {A B}, MI S A -> (A -> MI S B) -> MI S B
-  | newI    : forall {K}, MI S (Sets S K)
+  | newI    : forall {K} `{Hashable K}, MI S (Sets S K)
   | lookupI : forall {K} `{Hashable K}, Sets S K -> K -> MI S bool
   | insertI : forall {K} `{Hashable K}, Sets S K -> K -> MI S unit
   | deleteI : forall {K} `{Hashable K}, Sets S K -> K -> MI S unit.
 
   Definition M : Type -> Type -> Type := MI.
-  Definition pure : forall {S A}, A -> M S A := @pureI.
-  Definition bind : forall {S A B}, M S A -> (A -> M S B) -> M S B := @bindI.
-  Definition new : forall {S K}, M S (Sets S K) := @newI.
+  Definition pure   : forall {S A}, A -> M S A := @pureI.
+  Definition bind   : forall {S A B}, M S A -> (A -> M S B) -> M S B := @bindI.
+  Definition new    : forall {S K} `{Hashable K}, M S (Sets S K) := @newI.
   Definition lookup : forall {S K} `{Hashable K}, Sets S K -> K -> M S bool := @lookupI.
   Definition insert : forall {S K} `{Hashable K}, Sets S K -> K -> M S unit := @insertI.
   Definition delete : forall {S K} `{Hashable K}, Sets S K -> K -> M S unit := @deleteI.
@@ -65,7 +65,7 @@ Definition prog : bool :=
     SetsC.insert s 1 ;;
     SetsC.insert s 2 ;;
     SetsC.insert s 3 ;;
-    SetsC.lookup s 2).
+    SetsC.lookup s 0).
 
 CertiCoq Compile prog
   Extract Constants [

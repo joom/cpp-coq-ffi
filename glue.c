@@ -1,10 +1,6 @@
 #include "gc_stack.h"
 #include "glue.h"
-/* struct closure; */
-/* struct closure { */
-/*   value (*func)(struct thread_info, value, value); */
-/*   value env; */
-/* }; */
+struct closure;
 
 unsigned int get_unboxed_ordinal(value);
 unsigned int get_boxed_ordinal(value);
@@ -21,8 +17,8 @@ value make_prog_SetsC_MI_pureI(value, value, value *);
 value alloc_make_prog_SetsC_MI_pureI(struct thread_info *, value, value);
 value make_prog_SetsC_MI_bindI(value, value, value, value, value *);
 value alloc_make_prog_SetsC_MI_bindI(struct thread_info *, value, value, value, value);
-value make_prog_SetsC_MI_newI(value, value *);
-value alloc_make_prog_SetsC_MI_newI(struct thread_info *, value);
+value make_prog_SetsC_MI_newI(value, value, value *);
+value alloc_make_prog_SetsC_MI_newI(struct thread_info *, value, value);
 value make_prog_SetsC_MI_lookupI(value, value, value, value, value *);
 value alloc_make_prog_SetsC_MI_lookupI(struct thread_info *, value, value, value, value);
 value make_prog_SetsC_MI_insertI(value, value, value, value, value *);
@@ -182,20 +178,22 @@ value alloc_make_prog_SetsC_MI_bindI(struct thread_info *$tinfo, value $arg0, va
   return $argv + 1LL;
 }
 
-value make_prog_SetsC_MI_newI(value $arg0, value *$argv)
+value make_prog_SetsC_MI_newI(value $arg0, value $arg1, value *$argv)
 {
-  *($argv + 0LL) = (value) 1026LL;
+  *($argv + 0LL) = (value) 2050LL;
   *($argv + 1LL) = $arg0;
+  *($argv + 2LL) = $arg1;
   return $argv + 1LL;
 }
 
-value alloc_make_prog_SetsC_MI_newI(struct thread_info *$tinfo, value $arg0)
+value alloc_make_prog_SetsC_MI_newI(struct thread_info *$tinfo, value $arg0, value $arg1)
 {
   register value *$argv;
   $argv = (*$tinfo).alloc;
-  *($argv + 0LL) = 1026LL;
+  *($argv + 0LL) = 2050LL;
   *($argv + 1LL) = $arg0;
-  (*$tinfo).alloc = (*$tinfo).alloc + 2LL;
+  *($argv + 2LL) = $arg1;
+  (*$tinfo).alloc = (*$tinfo).alloc + 3LL;
   return $argv + 1LL;
 }
 
@@ -406,6 +404,7 @@ void print_prog_SetsC_MI(value $v, void $print_param_S(value))
       printf(*(names_of_prog_SetsC_MI + $tag));
       printf(space_lit);
       printf(type_lit);
+      printf(space_lit);
       printf(rparen_lit);
       break;
     case 3:

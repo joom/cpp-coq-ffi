@@ -13,6 +13,6 @@ int main() {
 
   print_Coq_Init_Datatypes_bool(tmp);
 
-  std::cout << "";
+  std::cout << "\n";
   return 0;
 }

@@ -22,39 +22,39 @@ value y_known_105(struct thread_info *, value, value);
 value y_known_104(struct thread_info *, value, value);
 value prim_wrapper_wrapper_103(struct thread_info *, value, value);
 value body(struct thread_info *);
-unsigned long long const body_info_205[2] = { 10LL, 0LL, };
+unsigned long long const body_info_203[2] = { 10LL, 0LL, };
 
-unsigned long long const prim_wrapper_wrapper_info_204[4] = { 0LL, 2LL, 0LL,
+unsigned long long const prim_wrapper_wrapper_info_202[4] = { 0LL, 2LL, 0LL,
   1LL, };
 
-unsigned long long const y_known_info_203[4] = { 18LL, 2LL, 0LL, 1LL, };
+unsigned long long const y_known_info_201[4] = { 18LL, 2LL, 0LL, 1LL, };
 
-unsigned long long const y_known_info_202[4] = { 20LL, 2LL, 0LL, 1LL, };
+unsigned long long const y_known_info_200[4] = { 20LL, 2LL, 0LL, 1LL, };
 
-unsigned long long const y_known_info_201[4] = { 22LL, 2LL, 0LL, 1LL, };
+unsigned long long const y_known_info_199[4] = { 22LL, 2LL, 0LL, 1LL, };
 
-unsigned long long const y_wrapper_info_200[4] = { 9LL, 2LL, 0LL, 1LL, };
-
-unsigned long long const y_wrapper_info_199[4] = { 0LL, 2LL, 0LL, 1LL, };
-
-unsigned long long const y_wrapper_info_198[4] = { 0LL, 2LL, 0LL, 1LL, };
+unsigned long long const y_wrapper_info_198[4] = { 5LL, 2LL, 0LL, 1LL, };
 
 unsigned long long const y_wrapper_info_197[4] = { 0LL, 2LL, 0LL, 1LL, };
 
-unsigned long long const y_wrapper_info_196[4] = { 12LL, 2LL, 0LL, 1LL, };
+unsigned long long const y_wrapper_info_196[4] = { 0LL, 2LL, 0LL, 1LL, };
 
-value y_wrapper_111(struct thread_info *$tinfo, value $env_179, value $s_180)
+unsigned long long const y_wrapper_info_195[4] = { 0LL, 2LL, 0LL, 1LL, };
+
+unsigned long long const y_wrapper_info_194[4] = { 13LL, 2LL, 0LL, 1LL, };
+
+value y_wrapper_111(struct thread_info *$tinfo, value $env_177, value $s_178)
 {
   struct stack_frame frame;
   value root[1];
-  register value $progdHashable_nat_proj_181;
-  register value $y_182;
+  register value $progdHashable_nat_proj_179;
+  register value $y_180;
+  register value $y_181;
+  register value $env_182;
   register value $y_183;
-  register value $env_184;
-  register value $y_185;
+  register value $y_184;
+  register value $y_wrapper_clo_185;
   register value $y_186;
-  register value $y_wrapper_clo_187;
-  register value $y_188;
   register value *$alloc;
   register value *$limit;
   register value *$args;
@@ -66,51 +66,52 @@ value y_wrapper_111(struct thread_info *$tinfo, value $env_179, value $s_180)
   frame.next = root;
   frame.root = root;
   frame.prev = (*$tinfo).fp;
-  if (!(12LL <= $limit - $alloc)) {
-    *(root + 0LL) = $env_179;
+  if (!(13LL <= $limit - $alloc)) {
+    *(root + 0LL) = $env_177;
     frame.next = root + 1LL;
     (*$tinfo).fp = &frame;
-    (*$tinfo).nalloc = 12LL;
+    (*$tinfo).nalloc = 13LL;
     garbage_collect($tinfo);
-    $env_179 = *(root + 0LL);
+    $env_177 = *(root + 0LL);
     (*$tinfo).fp = frame.prev;
     $alloc = (*$tinfo).alloc;
     $limit = (*$tinfo).limit;
   }
-  $progdHashable_nat_proj_181 = *((value *) $env_179 + 0LL);
-  $y_182 = 1LL;
-  $y_183 = (value) ($alloc + 1LL);
-  $alloc = $alloc + 2LL;
-  *((value *) $y_183 + -1LL) = 1026LL;
-  *((value *) $y_183 + 0LL) = $y_182;
-  $env_184 = (value) ($alloc + 1LL);
-  $alloc = $alloc + 2LL;
-  *((value *) $env_184 + -1LL) = 1024LL;
-  *((value *) $env_184 + 0LL) = $progdHashable_nat_proj_181;
-  $y_185 = 1LL;
-  $y_186 = 1LL;
-  $y_wrapper_clo_187 = (value) ($alloc + 1LL);
+  $progdHashable_nat_proj_179 = *((value *) $env_177 + 0LL);
+  $y_180 = 1LL;
+  $y_181 = (value) ($alloc + 1LL);
   $alloc = $alloc + 3LL;
-  *((value *) $y_wrapper_clo_187 + -1LL) = 2048LL;
-  *((value *) $y_wrapper_clo_187 + 0LL) = y_wrapper_110;
-  *((value *) $y_wrapper_clo_187 + 1LL) = $env_184;
-  $y_188 = (value) ($alloc + 1LL);
+  *((value *) $y_181 + -1LL) = 2050LL;
+  *((value *) $y_181 + 0LL) = $y_180;
+  *((value *) $y_181 + 1LL) = $progdHashable_nat_proj_179;
+  $env_182 = (value) ($alloc + 1LL);
+  $alloc = $alloc + 2LL;
+  *((value *) $env_182 + -1LL) = 1024LL;
+  *((value *) $env_182 + 0LL) = $progdHashable_nat_proj_179;
+  $y_183 = 1LL;
+  $y_184 = 1LL;
+  $y_wrapper_clo_185 = (value) ($alloc + 1LL);
+  $alloc = $alloc + 3LL;
+  *((value *) $y_wrapper_clo_185 + -1LL) = 2048LL;
+  *((value *) $y_wrapper_clo_185 + 0LL) = y_wrapper_110;
+  *((value *) $y_wrapper_clo_185 + 1LL) = $env_182;
+  $y_186 = (value) ($alloc + 1LL);
   $alloc = $alloc + 5LL;
-  *((value *) $y_188 + -1LL) = 4097LL;
-  *((value *) $y_188 + 0LL) = $y_185;
-  *((value *) $y_188 + 1LL) = $y_186;
-  *((value *) $y_188 + 2LL) = $y_183;
-  *((value *) $y_188 + 3LL) = $y_wrapper_clo_187;
+  *((value *) $y_186 + -1LL) = 4097LL;
+  *((value *) $y_186 + 0LL) = $y_183;
+  *((value *) $y_186 + 1LL) = $y_184;
+  *((value *) $y_186 + 2LL) = $y_181;
+  *((value *) $y_186 + 3LL) = $y_wrapper_clo_185;
   (*$tinfo).alloc = $alloc;
   (*$tinfo).limit = $limit;
-  return $y_188;
+  return $y_186;
 }
 
-value y_wrapper_110(struct thread_info *$tinfo, value $env_175, value $s_176)
+value y_wrapper_110(struct thread_info *$tinfo, value $env_173, value $s_174)
 {
   struct stack_frame frame;
   value root[2];
-  register value $progdHashable_nat_proj_178;
+  register value $progdHashable_nat_proj_176;
   register value *$alloc;
   register value *$limit;
   register value *$args;
@@ -122,22 +123,22 @@ value y_wrapper_110(struct thread_info *$tinfo, value $env_175, value $s_176)
   frame.next = root;
   frame.root = root;
   frame.prev = (*$tinfo).fp;
-  $progdHashable_nat_proj_178 = *((value *) $env_175 + 0LL);
+  $progdHashable_nat_proj_176 = *((value *) $env_173 + 0LL);
   $args = (*$tinfo).args;
   (*$tinfo).alloc = $alloc;
   (*$tinfo).limit = $limit;
   $result =
     ((value (*)(struct thread_info *, value, value)) y_known_104)
-    ($tinfo, $s_176, $progdHashable_nat_proj_178);
+    ($tinfo, $s_174, $progdHashable_nat_proj_176);
   return $result;
 }
 
-value y_wrapper_109(struct thread_info *$tinfo, value $env_170, value $anon_171)
+value y_wrapper_109(struct thread_info *$tinfo, value $env_168, value $anon_169)
 {
   struct stack_frame frame;
   value root[1];
-  register value $progdHashable_nat_proj_173;
-  register value $s_proj_174;
+  register value $progdHashable_nat_proj_171;
+  register value $s_proj_172;
   register value *$alloc;
   register value *$limit;
   register value *$args;
@@ -149,23 +150,23 @@ value y_wrapper_109(struct thread_info *$tinfo, value $env_170, value $anon_171)
   frame.next = root;
   frame.root = root;
   frame.prev = (*$tinfo).fp;
-  $progdHashable_nat_proj_173 = *((value *) $env_170 + 1LL);
-  $s_proj_174 = *((value *) $env_170 + 0LL);
+  $progdHashable_nat_proj_171 = *((value *) $env_168 + 1LL);
+  $s_proj_172 = *((value *) $env_168 + 0LL);
   $args = (*$tinfo).args;
   (*$tinfo).alloc = $alloc;
   (*$tinfo).limit = $limit;
   $result =
     ((value (*)(struct thread_info *, value, value)) y_known_105)
-    ($tinfo, $progdHashable_nat_proj_173, $s_proj_174);
+    ($tinfo, $progdHashable_nat_proj_171, $s_proj_172);
   return $result;
 }
 
-value y_wrapper_108(struct thread_info *$tinfo, value $env_165, value $anon_166)
+value y_wrapper_108(struct thread_info *$tinfo, value $env_163, value $anon_164)
 {
   struct stack_frame frame;
   value root[1];
-  register value $progdHashable_nat_proj_168;
-  register value $s_proj_169;
+  register value $progdHashable_nat_proj_166;
+  register value $s_proj_167;
   register value *$alloc;
   register value *$limit;
   register value *$args;
@@ -177,14 +178,14 @@ value y_wrapper_108(struct thread_info *$tinfo, value $env_165, value $anon_166)
   frame.next = root;
   frame.root = root;
   frame.prev = (*$tinfo).fp;
-  $progdHashable_nat_proj_168 = *((value *) $env_165 + 1LL);
-  $s_proj_169 = *((value *) $env_165 + 0LL);
+  $progdHashable_nat_proj_166 = *((value *) $env_163 + 1LL);
+  $s_proj_167 = *((value *) $env_163 + 0LL);
   $args = (*$tinfo).args;
   (*$tinfo).alloc = $alloc;
   (*$tinfo).limit = $limit;
   $result =
     ((value (*)(struct thread_info *, value, value)) y_known_106)
-    ($tinfo, $progdHashable_nat_proj_168, $s_proj_169);
+    ($tinfo, $progdHashable_nat_proj_166, $s_proj_167);
   return $result;
 }
 
@@ -197,8 +198,6 @@ value y_wrapper_107(struct thread_info *$tinfo, value $env_156, value $anon_157)
   register value $y_160;
   register value $y_161;
   register value $y_162;
-  register value $y_163;
-  register value $y_164;
   register value *$alloc;
   register value *$limit;
   register value *$args;
@@ -210,11 +209,11 @@ value y_wrapper_107(struct thread_info *$tinfo, value $env_156, value $anon_157)
   frame.next = root;
   frame.root = root;
   frame.prev = (*$tinfo).fp;
-  if (!(9LL <= $limit - $alloc)) {
+  if (!(5LL <= $limit - $alloc)) {
     *(root + 0LL) = $env_156;
     frame.next = root + 1LL;
     (*$tinfo).fp = &frame;
-    (*$tinfo).nalloc = 9LL;
+    (*$tinfo).nalloc = 5LL;
     garbage_collect($tinfo);
     $env_156 = *(root + 0LL);
     (*$tinfo).fp = frame.prev;
@@ -224,25 +223,17 @@ value y_wrapper_107(struct thread_info *$tinfo, value $env_156, value $anon_157)
   $progdHashable_nat_proj_158 = *((value *) $env_156 + 1LL);
   $s_proj_159 = *((value *) $env_156 + 0LL);
   $y_160 = 1LL;
-  $y_161 = (value) ($alloc + 1LL);
-  $alloc = $alloc + 2LL;
-  *((value *) $y_161 + -1LL) = 1024LL;
-  *((value *) $y_161 + 0LL) = $y_160;
+  $y_161 = 1LL;
   $y_162 = (value) ($alloc + 1LL);
-  $alloc = $alloc + 2LL;
-  *((value *) $y_162 + -1LL) = 1024LL;
-  *((value *) $y_162 + 0LL) = $y_161;
-  $y_163 = 1LL;
-  $y_164 = (value) ($alloc + 1LL);
   $alloc = $alloc + 5LL;
-  *((value *) $y_164 + -1LL) = 4099LL;
-  *((value *) $y_164 + 0LL) = $y_163;
-  *((value *) $y_164 + 1LL) = $progdHashable_nat_proj_158;
-  *((value *) $y_164 + 2LL) = $s_proj_159;
-  *((value *) $y_164 + 3LL) = $y_162;
+  *((value *) $y_162 + -1LL) = 4099LL;
+  *((value *) $y_162 + 0LL) = $y_161;
+  *((value *) $y_162 + 1LL) = $progdHashable_nat_proj_158;
+  *((value *) $y_162 + 2LL) = $s_proj_159;
+  *((value *) $y_162 + 3LL) = $y_160;
   (*$tinfo).alloc = $alloc;
   (*$tinfo).limit = $limit;
-  return $y_164;
+  return $y_162;
 }
 
 value y_known_106(struct thread_info *$tinfo, value $progdHashable_nat_143, value $s_144)
@@ -508,13 +499,13 @@ value body(struct thread_info *$tinfo)
 {
   struct stack_frame frame;
   value root[0];
-  register value $env_189;
-  register value $prim_wrapper_wrapper_clo_190;
-  register value $progdHashable_nat_191;
-  register value $y_192;
-  register value $env_193;
-  register value $y_wrapper_clo_194;
-  register value $prim_195;
+  register value $env_187;
+  register value $prim_wrapper_wrapper_clo_188;
+  register value $progdHashable_nat_189;
+  register value $y_190;
+  register value $env_191;
+  register value $y_wrapper_clo_192;
+  register value $prim_193;
   register value *$alloc;
   register value *$limit;
   register value *$args;
@@ -532,39 +523,39 @@ value body(struct thread_info *$tinfo)
     $alloc = (*$tinfo).alloc;
     $limit = (*$tinfo).limit;
   }
-  $env_189 = 1LL;
-  $prim_wrapper_wrapper_clo_190 = (value) ($alloc + 1LL);
+  $env_187 = 1LL;
+  $prim_wrapper_wrapper_clo_188 = (value) ($alloc + 1LL);
   $alloc = $alloc + 3LL;
-  *((value *) $prim_wrapper_wrapper_clo_190 + -1LL) = 2048LL;
-  *((value *) $prim_wrapper_wrapper_clo_190 + 0LL) =
+  *((value *) $prim_wrapper_wrapper_clo_188 + -1LL) = 2048LL;
+  *((value *) $prim_wrapper_wrapper_clo_188 + 0LL) =
     prim_wrapper_wrapper_103;
-  *((value *) $prim_wrapper_wrapper_clo_190 + 1LL) = $env_189;
-  $progdHashable_nat_191 = (value) ($alloc + 1LL);
+  *((value *) $prim_wrapper_wrapper_clo_188 + 1LL) = $env_187;
+  $progdHashable_nat_189 = (value) ($alloc + 1LL);
   $alloc = $alloc + 2LL;
-  *((value *) $progdHashable_nat_191 + -1LL) = 1024LL;
-  *((value *) $progdHashable_nat_191 + 0LL) = $prim_wrapper_wrapper_clo_190;
-  $y_192 = 1LL;
-  $env_193 = (value) ($alloc + 1LL);
+  *((value *) $progdHashable_nat_189 + -1LL) = 1024LL;
+  *((value *) $progdHashable_nat_189 + 0LL) = $prim_wrapper_wrapper_clo_188;
+  $y_190 = 1LL;
+  $env_191 = (value) ($alloc + 1LL);
   $alloc = $alloc + 2LL;
-  *((value *) $env_193 + -1LL) = 1024LL;
-  *((value *) $env_193 + 0LL) = $progdHashable_nat_191;
-  $y_wrapper_clo_194 = (value) ($alloc + 1LL);
+  *((value *) $env_191 + -1LL) = 1024LL;
+  *((value *) $env_191 + 0LL) = $progdHashable_nat_189;
+  $y_wrapper_clo_192 = (value) ($alloc + 1LL);
   $alloc = $alloc + 3LL;
-  *((value *) $y_wrapper_clo_194 + -1LL) = 2048LL;
-  *((value *) $y_wrapper_clo_194 + 0LL) = y_wrapper_111;
-  *((value *) $y_wrapper_clo_194 + 1LL) = $env_193;
+  *((value *) $y_wrapper_clo_192 + -1LL) = 2048LL;
+  *((value *) $y_wrapper_clo_192 + 0LL) = y_wrapper_111;
+  *((value *) $y_wrapper_clo_192 + 1LL) = $env_191;
   (*$tinfo).alloc = $alloc;
   (*$tinfo).limit = $limit;
   /*skip*/;
-  $prim_195 =
+  $prim_193 =
     ((value (*)(struct thread_info *, value, value)) set_runM)
-    ($tinfo, $y_192, $y_wrapper_clo_194);
+    ($tinfo, $y_190, $y_wrapper_clo_192);
   $alloc = (*$tinfo).alloc;
   $limit = (*$tinfo).limit;
   /*skip*/;
   (*$tinfo).alloc = $alloc;
   (*$tinfo).limit = $limit;
-  return $prim_195;
+  return $prim_193;
 }
 
 
