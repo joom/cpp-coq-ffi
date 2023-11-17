@@ -1,6 +1,11 @@
+#pragma once
 #include "gc_stack.h"
 #include "glue.h"
 struct closure;
+struct closure {
+  value (*func)(struct thread_info, value, value);
+  value env;
+};
 
 unsigned int get_unboxed_ordinal(value);
 unsigned int get_boxed_ordinal(value);
@@ -52,12 +57,12 @@ signed char const prop_lit[7] = { 60, 112, 114, 111, 112, 62, 0, };
 
 unsigned int get_unboxed_ordinal(value $v)
 {
-  return (value) $v >> 1LL;
+  return (unsigned long long) $v >> 1LL;
 }
 
 unsigned int get_boxed_ordinal(value $v)
 {
-  return *((value *) $v + -1LL) & 255LL;
+  return (unsigned long long) *((unsigned long long *) $v + -1LL) & 255LL;
 }
 
 value *get_args(value $v)

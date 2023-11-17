@@ -1,5 +1,7 @@
+#pragma once
 #include "gc_stack.h"
 #include "prims.h"
+#include "prog.prog.h"
 extern struct thread_info *make_tinfo(void);
 extern value y_wrapper_111(struct thread_info *, value, value);
 extern value y_wrapper_110(struct thread_info *, value, value);
@@ -11,7 +13,6 @@ extern value y_known_105(struct thread_info *, value, value);
 extern value y_known_104(struct thread_info *, value, value);
 extern value prim_wrapper_wrapper_103(struct thread_info *, value, value);
 extern value body(struct thread_info *);
-extern void garbage_collect(struct thread_info *);
 value y_wrapper_111(struct thread_info *, value, value);
 value y_wrapper_110(struct thread_info *, value, value);
 value y_wrapper_109(struct thread_info *, value, value);
