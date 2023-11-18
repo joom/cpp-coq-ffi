@@ -1,4 +1,5 @@
-#pragma once
+#ifndef GLUE_H
+#define GLUE_H
 #include "gc_stack.h"
 extern unsigned int get_unboxed_ordinal(value);
 extern unsigned int get_boxed_ordinal(value);
@@ -59,3 +60,4 @@ extern signed char const names_of_Coq_Init_Datatypes_unit[1][3];
 extern signed char const names_of_prog_SetsC_MI[6][8];
 
 
+#endif /* GLUE_H */

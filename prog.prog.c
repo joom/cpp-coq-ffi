@@ -1,5 +1,9 @@
-#pragma once
+#ifndef PROG_PROG_C
+#define PROG_PROG_C
 #include "gc_stack.h"
+#include "/home/coq/.opam/4.13.1+flambda/.opam-switch/build/coq-certicoq.dev+8.17/plugin/runtime/prim_floats.h"
+#include "/home/coq/.opam/4.13.1+flambda/.opam-switch/build/coq-certicoq.dev+8.17/plugin/runtime/prim_int63.h"
+#include "/home/coq/.opam/4.13.1+flambda/.opam-switch/build/coq-certicoq.dev+8.17/plugin/runtime/coq_c_ffi.h"
 #include "prims.h"
 #include "prog.prog.h"
 extern struct thread_info *make_tinfo(void);
@@ -560,3 +564,4 @@ value body(struct thread_info *$tinfo)
 }
 
 
+#endif /* PROG_PROG_C */

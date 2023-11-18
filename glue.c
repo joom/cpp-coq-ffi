@@ -1,4 +1,5 @@
-#pragma once
+#ifndef GLUE_C
+#define GLUE_C
 #include "gc_stack.h"
 #include "glue.h"
 struct closure;
@@ -469,3 +470,4 @@ value call(struct thread_info *$tinfo, value $clo, value $arg)
 }
 
 
+#endif /* GLUE_C */
