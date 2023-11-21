@@ -2,14 +2,8 @@
 
 A primitive set data structure for Coq, using `std::set` from C++.
 
-The example returns the right result but it may have other bugs. This is only meant to be an experiment.
+This is only meant to be an experiment. The example returns the right result but it has other bugs about memory management.
 
-You can compile it by `make cpp`, and run `./prog`.
+You can compile it by `make`, and then run `./prog`.
 
-# Note
-
-I'm committing the CertiCoq generated C files here, but I had to make a few changes in them:
-
-- Removed includes like `"home/coq/.opam/...."` from `prog.prog.c`.
-
-So if you run `make coq`, you may have to do these.
+This compiles for me with this commit of CertiCoq: https://github.com/CertiCoq/certicoq/commit/706ef73cf8ca9b3d41e046b0bf35e28083cfeac0

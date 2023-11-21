@@ -1,0 +1,10 @@
+prog
+*.glob
+*.vo
+*.vok
+*.vos
+prog.prog.c
+prog.prog.h
+glue.c
+glue.h
+*.aux

@@ -1,6 +1,6 @@
 extern "C" {
-  #include "values.h"
-  #include "gc_stack.h"
+  #include <values.h>
+  #include <gc_stack.h>
   #include "glue.h"
 }
 #include <any>
@@ -11,7 +11,6 @@ extern "C" {
 #include <set>
 #include <vector>
  
-
 #define BEGINFRAME(tinfo,n) {{{{{ value __ROOT__[n];   \
    struct stack_frame __FRAME__ = { NULL/*bogus*/, __ROOT__, tinfo->fp }; \
    value __RTEMP__;
@@ -29,43 +28,6 @@ extern "C" {
   __RTEMP__=(exp),                              \
   (a0)=__ROOT__[0], (a1)=__ROOT__[1],             \
   tinfo->fp=__FRAME__.prev, __RTEMP__)
-
-enum nat { O, S };
-
-value uint63_from_nat(value n) {
-  value temp = n;
-  uint64_t i = 0;
-
-  while (get_Coq_Init_Datatypes_nat_tag(temp) == S) {
-    i++;
-    temp = get_args(temp)[0];
-  }
-  return (value) ((i << 1) + 1);
-}
-
-value uint63_to_nat(struct thread_info *tinfo, value t) {
-  uint64_t i = (uint64_t) (((uint64_t) t) >> 1);
-  value temp = make_Coq_Init_Datatypes_nat_O();
-  BEGINFRAME(tinfo,1)
-  while (i) {
-   if (!(2 <= tinfo->limit - tinfo->alloc)) {
-      tinfo->nalloc = 2;
-      LIVEPOINTERS1(tinfo,(garbage_collect(tinfo),NULL),temp);
-    } 
-    temp = alloc_make_Coq_Init_Datatypes_nat_S(tinfo, temp);
-    i--;
-  }
-  return temp;
-  ENDFRAME
-}
-
-value uint63_add(value x, value y) {
-  return (value) ((((((uint64_t) x) >> 1) + (((uint64_t) y) >> 1)) << 1) + 1);
-}
-
-value uint63_mul(value x, value y) {
-  return (value) ((((((uint64_t) x) >> 1) * (((uint64_t) y) >> 1)) << 1) + 1);
-}
 
 enum mi { PURE, BIND, NEW, LOOKUP, INSERT, DELETE };
 
@@ -118,6 +80,7 @@ value runM(struct thread_info *tinfo, std::vector<std::any>& all_sets, value act
       std::cout << "The set has " << cast_set->size() << " elements!\n";
     #endif
     cast_set->insert(key);
+    // FIXME here `key` should be added to the remembered set
     #ifdef DEBUG
       std::cout << "The set has " << cast_set->size() << " elements!\n";
     #endif
@@ -135,6 +98,8 @@ value runM(struct thread_info *tinfo, std::vector<std::any>& all_sets, value act
     value key = get_args(action)[3];
     std::set<value, decltype(cmp)> *cast_set = (std::set<value, decltype(cmp)> *) s;
     cast_set->erase(key);
+    // FIXME here `key` should be removed from the remembered set.
+    // We don't really have a mechanism to remove things from the remembered set yet.
     return make_Coq_Init_Datatypes_unit_tt();
 
   } else if (tag == LOOKUP) {
@@ -174,6 +139,8 @@ value set_runM(struct thread_info *tinfo, value a, value action) {
     // FIXME this is causing a bad any cast error. 
     // Not sure how to fix it because all the sets have different types based on the cmp function.
     /* std::any_cast<std::set<value>>(all_sets[i].second).clear(); */
+    // FIXME all members of the set should be removed from the remembered set.
+    // We don't really have a mechanism to remove things from the remembered set yet.
 	}
   return temp;
 }

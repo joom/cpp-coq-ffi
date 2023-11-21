@@ -16,6 +16,13 @@ Module UInt63C : UInt63.
   Axiom mul : t -> t -> t.
 End UInt63C.
 
+  CertiCoq Register [
+    UInt63C.from_nat => "uint63_from_nat",
+    UInt63C.to_nat => "uint63_to_nat" with tinfo,
+    UInt63C.add => "uint63_add"
+  ]
+  Include [ "uint63_prims.h" ].
+
 Class Hashable (A : Type) : Type :=
   { hash : A -> UInt63C.t }.
 
@@ -54,6 +61,8 @@ Module SetsC <: Sets.
   Axiom runM : forall {A}, (forall S, M S A) -> A.
 End SetsC.
 
+CertiCoq Register [ SetsC.runM => "set_runM" with tinfo ] Include [ "set_prims.h" ].
+
 Notation "e1 ;; e2" :=
   (@SetsC.bind _ _ _ e1 (fun _ => e2)) (at level 61, right associativity).
 Notation "x <- c1 ;; c2" :=
@@ -67,13 +76,5 @@ Definition prog : bool :=
     SetsC.insert s 3 ;;
     SetsC.lookup s 0).
 
-CertiCoq Compile prog
-  Extract Constants [
-    SetsC.runM => "set_runM" with tinfo,
-    UInt63C.from_nat => "uint63_from_nat",
-    UInt63C.to_nat => "uint63_to_nat" with tinfo,
-    UInt63C.add => "uint63_add"
-  ]
-  Include [ "prims.h" ].
-
+CertiCoq Compile prog.
 CertiCoq Generate Glue -file "glue" [ bool, nat, SetsC.MI, Hashable ].

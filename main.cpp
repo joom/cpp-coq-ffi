@@ -1,10 +1,12 @@
 extern "C" {
-  #include "gc_stack.c"
+  #include "stdbool.h"
+  #include <gc_stack.c>
   #include "glue.c"
   #include "prog.prog.c"
 }
 
-#include "prims.cpp"
+#include "uint63_prims.cpp"
+#include "set_prims.cpp"
 #include <iostream>
 
 int main() {
